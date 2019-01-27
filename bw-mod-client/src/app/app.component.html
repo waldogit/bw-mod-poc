@@ -1,0 +1,17 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <div>
+    Conversation State Id
+    <input #convId
+    (keyup.enter)="update(convId.value)"
+    (blur)="update(convId.value)">
+  </div>
+  <div>
+    <a routerLink="/search/{{convId.value}}">
+      <span>Search</span>Start a new travel
+    </a>
+  </div>
+<router-outlet></router-outlet>

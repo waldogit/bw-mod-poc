@@ -1,0 +1,15 @@
+query flights {
+  flights {
+    id
+    flightcode
+    fromAirport
+    toAirport
+    departureDate
+    arrivalDate
+    fare {
+      currencyCode
+      amount
+    }
+  }
+}
+

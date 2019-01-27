@@ -1,0 +1,7 @@
+export type Maybe<T> = T | null;
+
+export interface PassengerInput {
+  id?: Maybe<string>;
+
+  passengerType?: Maybe<string>;
+}
