@@ -1,3 +1,4 @@
+import { PassengerModule } from './passenger/passenger.module';
 import { SearchModule } from './search/search.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -22,7 +23,8 @@ import { InMemoryCache } from "apollo-cache-inmemory";
     HttpClientModule,
     HttpLinkModule,
     ApolloModule,
-    SearchModule
+    SearchModule,
+    PassengerModule
   ],
   providers: [{
     provide: APOLLO_OPTIONS,

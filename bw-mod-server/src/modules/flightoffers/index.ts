@@ -8,7 +8,7 @@ export const FlightoffersModule = new GraphQLModule({
   resolvers,
   typeDefs: gql`
     type Flight {
-      id: String
+      id: Int
       flightcode: String
       fromAirport: String
       toAirport: String

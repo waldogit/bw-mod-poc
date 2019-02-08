@@ -1,6 +1,6 @@
 export const flightOffers = [
     {
-      id: '1',
+      id: 1,
       flightcode: 'LK1234',
       fromAirport: 'AMS',
       toAirport: 'CDG',
@@ -12,7 +12,7 @@ export const flightOffers = [
       }
     },
     {
-      id: '2',
+      id: 2,
       flightcode: 'LK1234',
       fromAirport: 'AMS',
       toAirport: 'CDG',
@@ -24,7 +24,7 @@ export const flightOffers = [
       }
     },
     {
-      id: '3',
+      id: 3,
       flightcode: 'FA1234',
       fromAirport: 'CDG',
       toAirport: 'AMS',
@@ -36,7 +36,7 @@ export const flightOffers = [
       }
     },
     {
-      id: '4',
+      id: 4,
       flightcode: 'FA1234',
       fromAirport: 'AMS',
       toAirport: 'CDG',
@@ -48,7 +48,7 @@ export const flightOffers = [
       }
     },
     {
-      id: '5',
+      id: 5,
       flightcode: 'LK1235',
       fromAirport: 'CDG',
       toAirport: 'BCN',
@@ -60,7 +60,7 @@ export const flightOffers = [
       }
     },
     {
-      id: '6',
+      id: 6,
       flightcode: 'LK1235',
       fromAirport: 'CDG',
       toAirport: 'BCN',
@@ -72,7 +72,7 @@ export const flightOffers = [
       }
     },
     {
-      id: '7',
+      id: 7,
       flightcode: 'FA1235',
       fromAirport: 'BCN',
       toAirport: 'CDG',
@@ -84,7 +84,7 @@ export const flightOffers = [
       }
     },
     {
-      id: '8',
+      id: 8,
       flightcode: 'FA1235',
       fromAirport: 'CDG',
       toAirport: 'BCN',
@@ -95,8 +95,5 @@ export const flightOffers = [
         amount: 180
       }
     },
-  
-  
-    
   ];
   

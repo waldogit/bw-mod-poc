@@ -5,9 +5,10 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
 
 const uri = ''; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink) {
+  const cache = new InMemoryCache();
   return {
     link: httpLink.create({uri}),
-    cache: new InMemoryCache(),
+    cache
   };
 }
 

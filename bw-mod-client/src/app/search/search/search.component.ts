@@ -1,9 +1,6 @@
-import { Flights } from './../../../generated/graphql';
+import { Flights, ConversationInput, FlightsGQL, StartConversationGQL } from './../../../generated/graphql';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { FlightsGQL } from '../../../generated/graphql';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -14,49 +11,53 @@ export class SearchComponent implements OnInit {
   flights: Flights.Flights[];
   passengerTypes: String[];
   convId: string;
-  outBound: Flights.Flights[];
-  homeBound: Flights.Flights[];
+  outboundSelected: number;
+  homeboundSelected: number;
   oneTo10: number[];
-  outbound: Flights.Flights[];
-  homebound: Flights.Flights[];
+  outboundFlights: Flights.Flights[];
+  homeboundFlights: Flights.Flights[];
   adultCount: number;
   childCount: number;
   infantCount: number;
   
-  constructor(private getFlights: FlightsGQL, private route: ActivatedRoute) { }
+  constructor(private getFlights: FlightsGQL, private startConversation: StartConversationGQL, private route: ActivatedRoute, private router: Router) { }
   
   ngOnInit() {
     this.getFlights.fetch()
     .subscribe(result => {
       this.flights = result.data.flights})
-      this.convId = this.route.snapshot.paramMap.get('convId');
-      console.log('============== convid', this.convId);
       this.passengerTypes = [];
-      this.oneTo10 = [1,2,3,4,5,6,7,8,9,10];
+      this.oneTo10 = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
   }
   addConversation() {
-    console.log('=============== continue', this);
-    console.log('=====outbound', this.outbound);
-    console.log('=====homebound', this.homebound);
-    console.log('=====adultCount', this.adultCount);
-    console.log('=====childCount', this.childCount);
-    console.log('=====infantCount', this.infantCount);
+    const input: ConversationInput = {
+      outbound: [ +this.outboundSelected ],
+      homebound: [ +this.homeboundSelected ],
+      passengerCounts: {
+        adult: +this.adultCount,
+        child: +this.childCount,
+        infant: +this.infantCount
+      }
+    };
+    this.startConversation.mutate({conversation: input}).subscribe(result => {
+      console.log('=====================start conv result.data.startConversation', result.data.startConversation);
+      this.router.navigate([`../passenger/${result.data.startConversation.convId}`]);
+
+    })
   }
-  updateOutbound(outboundFlights) {
-    this.outbound = outboundFlights;
-    console.log('===========updating outbound', this.outbound);
+  updateOutbound(outbound: number) {
+    this.outboundSelected = outbound;
   }
-  updateHomebound(homeboundFlights) {
-    this.homebound = homeboundFlights;
-    console.log('===========updating outbound', this.homebound);
+  updateHomebound(homebound: number) {
+    this.homeboundSelected = homebound;
   }
-  updateAdultCount(adultCount) {
+  updateAdultCount(adultCount: number) {
     this.adultCount = adultCount;
   }
-  updateChildCount(childCount) {
+  updateChildCount(childCount: number) {
     this.childCount = childCount;
   }
-  updateInfantCount(infantCount) {
+  updateInfantCount(infantCount: number) {
     this.infantCount = infantCount;
   }
 

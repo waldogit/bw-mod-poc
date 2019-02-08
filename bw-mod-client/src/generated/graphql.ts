@@ -1,8 +1,100 @@
 export type Maybe<T> = T | null;
 
+export interface ConversationInput {
+  outbound?: Maybe<(Maybe<number>)[]>;
+
+  homebound?: Maybe<(Maybe<number>)[]>;
+
+  passengerCounts?: Maybe<PassengerCoInput>;
+}
+
+export interface PassengerCoInput {
+  adult: number;
+
+  child: number;
+
+  infant: number;
+}
+
 // ====================================================
 // Documents
 // ====================================================
+
+export namespace GetConversation {
+  export type Variables = {
+    convId?: Maybe<number>;
+  };
+
+  export type Query = {
+    __typename?: "Query";
+
+    getConversation: Maybe<GetConversation>;
+  };
+
+  export type GetConversation = {
+    __typename?: "Conversation";
+
+    id: Maybe<string>;
+
+    convId: number;
+
+    itinerary: Itinerary;
+
+    passengers: (Maybe<Passengers>)[];
+  };
+
+  export type Itinerary = {
+    __typename?: "Itinerary";
+
+    price: Price;
+
+    connections: Maybe<(Maybe<Connections>)[]>;
+  };
+
+  export type Price = {
+    __typename?: "Money";
+
+    currencyCode: Maybe<string>;
+
+    amount: Maybe<number>;
+  };
+
+  export type Connections = {
+    __typename?: "Connection";
+
+    connectionType: string;
+
+    segments: (Maybe<Segments>)[];
+  };
+
+  export type Segments = {
+    __typename?: "Segment";
+
+    toAirport: string;
+
+    fromAirport: string;
+
+    fare: Fare;
+
+    arrivalDate: string;
+
+    departureDate: string;
+  };
+
+  export type Fare = {
+    __typename?: "Money";
+
+    currencyCode: Maybe<string>;
+
+    amount: Maybe<number>;
+  };
+
+  export type Passengers = {
+    __typename?: "Passenger";
+
+    passengerType: string;
+  };
+}
 
 export namespace Flights {
   export type Variables = {};
@@ -16,7 +108,7 @@ export namespace Flights {
   export type Flights = {
     __typename?: "Flight";
 
-    id: Maybe<string>;
+    id: Maybe<number>;
 
     flightcode: Maybe<string>;
 
@@ -40,6 +132,82 @@ export namespace Flights {
   };
 }
 
+export namespace StartConversation {
+  export type Variables = {
+    conversation?: Maybe<ConversationInput>;
+  };
+
+  export type Mutation = {
+    __typename?: "Mutation";
+
+    startConversation: Maybe<StartConversation>;
+  };
+
+  export type StartConversation = {
+    __typename?: "Conversation";
+
+    id: Maybe<string>;
+
+    convId: number;
+
+    itinerary: Itinerary;
+
+    passengers: (Maybe<Passengers>)[];
+  };
+
+  export type Itinerary = {
+    __typename?: "Itinerary";
+
+    price: Price;
+
+    connections: Maybe<(Maybe<Connections>)[]>;
+  };
+
+  export type Price = {
+    __typename?: "Money";
+
+    currencyCode: Maybe<string>;
+
+    amount: Maybe<number>;
+  };
+
+  export type Connections = {
+    __typename?: "Connection";
+
+    connectionType: string;
+
+    segments: (Maybe<Segments>)[];
+  };
+
+  export type Segments = {
+    __typename?: "Segment";
+
+    toAirport: string;
+
+    fromAirport: string;
+
+    fare: Fare;
+
+    arrivalDate: string;
+
+    departureDate: string;
+  };
+
+  export type Fare = {
+    __typename?: "Money";
+
+    currencyCode: Maybe<string>;
+
+    amount: Maybe<number>;
+  };
+
+  export type Passengers = {
+    __typename?: "Passenger";
+
+    passengerType: string;
+  };
+}
+
 // ====================================================
 // START: Apollo Angular template
 // ====================================================
@@ -56,6 +224,44 @@ import gql from "graphql-tag";
 @Injectable({
   providedIn: "root"
 })
+export class GetConversationGQL extends Apollo.Query<
+  GetConversation.Query,
+  GetConversation.Variables
+> {
+  document: any = gql`
+    query getConversation($convId: Int) {
+      getConversation(convId: $convId) {
+        id
+        convId
+        itinerary {
+          price {
+            currencyCode
+            amount
+          }
+          connections {
+            connectionType
+            segments {
+              toAirport
+              fromAirport
+              fare {
+                currencyCode
+                amount
+              }
+              arrivalDate
+              departureDate
+            }
+          }
+        }
+        passengers {
+          passengerType
+        }
+      }
+    }
+  `;
+}
+@Injectable({
+  providedIn: "root"
+})
 export class FlightsGQL extends Apollo.Query<Flights.Query, Flights.Variables> {
   document: any = gql`
     query flights {
@@ -69,6 +275,44 @@ export class FlightsGQL extends Apollo.Query<Flights.Query, Flights.Variables> {
         fare {
           currencyCode
           amount
+        }
+      }
+    }
+  `;
+}
+@Injectable({
+  providedIn: "root"
+})
+export class StartConversationGQL extends Apollo.Mutation<
+  StartConversation.Mutation,
+  StartConversation.Variables
+> {
+  document: any = gql`
+    mutation startConversation($conversation: ConversationInput) {
+      startConversation(conversation: $conversation) {
+        id
+        convId
+        itinerary {
+          price {
+            currencyCode
+            amount
+          }
+          connections {
+            connectionType
+            segments {
+              toAirport
+              fromAirport
+              fare {
+                currencyCode
+                amount
+              }
+              arrivalDate
+              departureDate
+            }
+          }
+        }
+        passengers {
+          passengerType
         }
       }
     }

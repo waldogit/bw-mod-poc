@@ -51,6 +51,7 @@ export const AncillariesModule = new GraphQLModule({
     }
 
     type Conversation {
+      id: ID
       convId: Int!
       itinerary: Itinerary!
       passengers: [Passenger]!

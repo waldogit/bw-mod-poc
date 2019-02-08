@@ -1,0 +1,28 @@
+mutation startConversation($conversation: ConversationInput) {
+  startConversation(conversation: $conversation) {
+    id
+    convId
+    itinerary {
+      price {
+        currencyCode
+        amount
+      }
+      connections {
+        connectionType
+        segments {
+          toAirport
+          fromAirport
+          fare {
+            currencyCode
+            amount
+          }
+          arrivalDate
+          departureDate
+        }
+      }
+    }
+    passengers {
+      passengerType
+    }
+  }
+}

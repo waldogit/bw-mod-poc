@@ -2,14 +2,14 @@
   <h3>Flight list</h3>
   <label for="outbound-flight-select">Choose the flights you want for your next travel</label>
   <h4>outbound</h4>
-  <select id="outbound-flight-select" #outbound *ngFor="let flight of flights" multiple size="3" select (blur)="updateOutbound(outbound.value)">
+  <select id="outbound-flight-select" #outbound *ngFor="let flight of flights" multiple size="3" select (click)="updateOutbound(outbound.value)">
     <option value={{flight.id}}>
       {{flight.fromAirport}}-{{flight.toAirport}} 
       {{flight.flightcode}} {{flight.departureDate}} 
       price: {{flight.fare?.currencyCode}} {{flight.fare?.amount}}</option>
   </select>
   <h4>homebound</h4>
-  <select id="homebound-flight-select" #homebound *ngFor="let flight of flights" multiple size=3 (blur)="updateHomebound(homebound.value)">
+  <select id="homebound-flight-select" #homebound *ngFor="let flight of flights" multiple size=3 (click)="updateHomebound(homebound.value)">
     <option value={{flight.id}}>
       {{flight.fromAirport}}-{{flight.toAirport}} 
       {{flight.flightcode}} {{flight.departureDate}} 
@@ -18,7 +18,7 @@
   <div>
     <label for="adult-count" #adultcount>How many adults</label>
     <span>
-      <select id="adult-count" #adultCount *ngFor="let ind of oneTo10" size=3 (blur)="updateAdultCount(adultCount.value)">
+      <select id="adult-count" #adultCount *ngFor="let ind of oneTo10" size=3 (click)="updateAdultCount(adultCount.value)">
         <option value={{ind}}>{{ind}}</option>
       </select>
     </span>
@@ -26,16 +26,16 @@
   <div>
     <label for="child-count">How many children</label>
     <span>
-      <select id="child-count" #childCount *ngFor="let ind of oneTo10" size=3 (blur)="updateChildCount(childCount.value)">
-        <option value="{{ind}}">{{ind}}</option>
+      <select id="child-count" #childCount *ngFor="let ind of oneTo10" size=3 (click)="updateChildCount(childCount.value)">
+        <option value={{ind}}>{{ind}}</option>
       </select>
     </span>
   </div>
   <div>
-    <label for="adult-count">How many infants</label>
+    <label for="infant-count">How many infants</label>
     <span>
-      <select id="adult-count" #infantCount *ngFor="let ind of oneTo10" size=3 (blur)="updateInfantCount(infantCount.value)">
-        <option value=ind>{{ind}}</option>
+      <select id="infant-count" #infantCount *ngFor="let ind of oneTo10" size=3 (click)="updateInfantCount(infantCount.value)">
+        <option value={{ind}}>{{ind}}</option>
       </select>
     </span>
   </div>
