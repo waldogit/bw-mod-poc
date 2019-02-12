@@ -26,3 +26,8 @@ mutation startConversation($conversation: ConversationInput) {
     }
   }
 }
+# as getConversation(startConversation.response.data.startConversation.convId)
+
+# yes this proposal would be invalid graphql, but the developer experience would be such a bliss!
+# when the output types of the query are aligned with those of the mutation, no further mapping is needed
+# I think it would be fair to arrange your schema in that way.
