@@ -1,4 +1,5 @@
 import { Flights, ConversationInput, FlightsGQL, StartConversationGQL } from './../../../generated/graphql';
+import gql from "graphql-tag";
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -39,7 +40,44 @@ export class SearchComponent implements OnInit {
         infant: +this.infantCount
       }
     };
-    this.startConversation.mutate({conversation: input}).subscribe(result => {
+    this.startConversation.mutate({conversation: input}, {update: (cache, res) => {
+      cache.writeQuery({
+          query: gql`
+          query getConversation($convId: Int) {
+            getConversation(convId: $convId) {
+              id
+              convId
+              itinerary {
+                price {
+                  currencyCode
+                  amount
+                }
+                connections {
+                  connectionType
+                  segments {
+                    toAirport
+                    fromAirport
+                    fare {
+                      currencyCode
+                      amount
+                    }
+                    arrivalDate
+                    departureDate
+                  }
+                }
+              }
+              passengers {
+                passengerType
+              }
+            }
+          }
+        `,
+        variables: {
+            convId: res.data.startConversation.convId
+        },
+        data: res.data
+      })
+  }}).subscribe(result => {
       console.log('=====================start conv result.data.startConversation', result.data.startConversation);
       this.router.navigate([`../passenger/${result.data.startConversation.convId}`]);
 
