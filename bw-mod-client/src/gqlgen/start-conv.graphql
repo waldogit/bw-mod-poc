@@ -1,5 +1,5 @@
 mutation startConversation($conversation: ConversationInput) {
-  startConversation(conversation: $conversation) {
+  conversation(conversation: $conversation) {
     id
     convId
     itinerary {
@@ -26,8 +26,9 @@ mutation startConversation($conversation: ConversationInput) {
     }
   }
 }
-# as getConversation(startConversation.response.data.startConversation.convId)
+# update using (_.data.conversation.convId)
 
 # yes this proposal would be invalid graphql, but the developer experience would be such a bliss!
-# when the output types of the query are aligned with those of the mutation, no further mapping is needed
-# I think it would be fair to arrange your schema in that way.
+# It further leverages the assumption that the mutation and updated query field key are homonymic.
+# assuming they also return the same type, then all that is needed to generate the update is a way to map the mutation response 
+# to the query input

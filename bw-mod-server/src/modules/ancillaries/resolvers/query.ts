@@ -3,6 +3,6 @@ import { ModuleContext } from '@graphql-modules/core';
 
 export default {
     Query: {
-        getConversation: (root, { convId }, { injector }: ModuleContext) => injector.get(AncillariesProvider).getConversation(convId)
+        conversation: (root, { convId }, { injector }: ModuleContext) => injector.get(AncillariesProvider).getConversation(convId)
     }
 }

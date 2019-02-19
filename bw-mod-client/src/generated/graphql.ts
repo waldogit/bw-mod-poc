@@ -28,10 +28,10 @@ export namespace GetConversation {
   export type Query = {
     __typename?: "Query";
 
-    getConversation: Maybe<GetConversation>;
+    conversation: Maybe<Conversation>;
   };
 
-  export type GetConversation = {
+  export type Conversation = {
     __typename?: "Conversation";
 
     id: Maybe<string>;
@@ -140,10 +140,10 @@ export namespace StartConversation {
   export type Mutation = {
     __typename?: "Mutation";
 
-    startConversation: Maybe<StartConversation>;
+    conversation: Maybe<Conversation>;
   };
 
-  export type StartConversation = {
+  export type Conversation = {
     __typename?: "Conversation";
 
     id: Maybe<string>;
@@ -230,7 +230,7 @@ export class GetConversationGQL extends Apollo.Query<
 > {
   document: any = gql`
     query getConversation($convId: Int) {
-      getConversation(convId: $convId) {
+      conversation(convId: $convId) {
         id
         convId
         itinerary {
@@ -289,7 +289,7 @@ export class StartConversationGQL extends Apollo.Mutation<
 > {
   document: any = gql`
     mutation startConversation($conversation: ConversationInput) {
-      startConversation(conversation: $conversation) {
+      conversation(conversation: $conversation) {
         id
         convId
         itinerary {

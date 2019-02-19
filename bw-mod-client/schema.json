@@ -22,7 +22,7 @@
             "deprecationReason": null
           },
           {
-            "name": "getConversation",
+            "name": "conversation",
             "description": "",
             "args": [
               {
@@ -658,7 +658,7 @@
         "description": "",
         "fields": [
           {
-            "name": "startConversation",
+            "name": "conversation",
             "description": "",
             "args": [
               {

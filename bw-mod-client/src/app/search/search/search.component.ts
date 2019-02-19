@@ -44,7 +44,7 @@ export class SearchComponent implements OnInit {
       cache.writeQuery({
           query: gql`
           query getConversation($convId: Int) {
-            getConversation(convId: $convId) {
+            conversation(convId: $convId) {
               id
               convId
               itinerary {
@@ -73,13 +73,13 @@ export class SearchComponent implements OnInit {
           }
         `,
         variables: {
-            convId: res.data.startConversation.convId
+            convId: res.data.conversation.convId
         },
         data: res.data
       })
   }}).subscribe(result => {
-      console.log('=====================start conv result.data.startConversation', result.data.startConversation);
-      this.router.navigate([`../passenger/${result.data.startConversation.convId}`]);
+      console.log('=====================start conv result.data', result.data.conversation);
+      this.router.navigate([`../passenger/${result.data.conversation.convId}`]);
 
     })
   }

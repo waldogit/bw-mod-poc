@@ -58,11 +58,11 @@ export const AncillariesModule = new GraphQLModule({
     }
 
     type Query {
-      getConversation(convId: Int): Conversation
+      conversation(convId: Int): Conversation
     }
 
     type Mutation {
-        startConversation(conversation: ConversationInput): Conversation
+        conversation(conversation: ConversationInput): Conversation
     }
   `,
 });

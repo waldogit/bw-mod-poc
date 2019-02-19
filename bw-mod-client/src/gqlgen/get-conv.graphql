@@ -1,5 +1,5 @@
 query getConversation($convId: Int) {
-  getConversation(convId: $convId) {
+  conversation(convId: $convId) {
     id
     convId
     itinerary {
