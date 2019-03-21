@@ -22,6 +22,7 @@ query getConversation($convId: Int) {
       }
     }
     passengers {
+      id
       passengerType
     }
   }

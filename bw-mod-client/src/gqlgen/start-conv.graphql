@@ -22,6 +22,7 @@ mutation startConversation($conversation: ConversationInput) {
       }
     }
     passengers {
+      id
       passengerType
     }
   }

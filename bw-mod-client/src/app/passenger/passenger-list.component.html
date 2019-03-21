@@ -1,0 +1,15 @@
+<h2>Passenger Entry Form</h2>
+<form *ngIf="passengerList" [formGroup]="form">
+  <mat-accordion class="pax-headers-align" formArrayName="passengers">
+    
+    <div  *ngFor="let passenger of form.controls.passengers.controls; let pi=index" [formGroupName]="pi">
+      <app-passenger [index]="pi" [passengers]="passengerList" [formFields]="passengerFormGroupMap" 
+      [fieldsMap]="passengerAdditionalMap" [numberOfPassengers]="passengerList.length">
+      </app-passenger>
+
+    </div>
+  </mat-accordion>
+  <button (click)="sendPassengers()">Continue</button>
+
+  
+</form>

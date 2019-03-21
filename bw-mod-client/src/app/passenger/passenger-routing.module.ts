@@ -1,9 +1,9 @@
-import { PassengerComponent } from './passenger.component';
+import { PassengerListComponent } from './passenger-list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'passenger/:convId', component: PassengerComponent }
+  { path: 'passenger/:convId', component: PassengerListComponent }
 ];
 
 @NgModule({

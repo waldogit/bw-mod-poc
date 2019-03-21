@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, APOLLO_OPTIONS } from "apollo-angular";
 import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { InMemoryCache } from "apollo-cache-inmemory";
     HttpLinkModule,
     ApolloModule,
     SearchModule,
-    PassengerModule
+    PassengerModule,
+    BrowserAnimationsModule
   ],
   providers: [{
     provide: APOLLO_OPTIONS,

@@ -11,7 +11,9 @@ export const OrdersModule = new GraphQLModule({
     typeDefs: gql`
         type Passenger {
             fullName: String
+            birthDate: Int
             emailAddress: String
+            additionalFields: AdditionalField
         }
         type PassengerInput {
             paxType: String!
@@ -23,6 +25,10 @@ export const OrdersModule = new GraphQLModule({
             fieldId: String!
             fieldValue: String
         }
+        type AdditionalField {
+            fieldId: String!
+            fieldValue: String
+        }
         type FieldEntry {
             fieldId: String!
             fieldLabel: String
@@ -30,9 +36,8 @@ export const OrdersModule = new GraphQLModule({
             fieldRegex: String
         }
         type PassengerEntry {
-            passengerType: String!
-            fullName: FieldEntry
-            emailAddress: FieldEntry
+            id: ID!
+            passengerId: String!
             additionalFields: [FieldEntry]
         }
         type PaymentEntry {

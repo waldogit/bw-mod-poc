@@ -30,7 +30,7 @@ export class Conversation {
         this.passengers = [];
         ["adult", "child", "infant"].forEach(paxType => {
             for (let i = 0; i < passengerCounts[paxType]; i++) {
-                this.passengers.push(new PassengerAn(paxType));
+                this.passengers.push(new PassengerAn(convId + 'Passenger' + paxType + i, paxType));
             }
         });
         const paxRate = {
@@ -57,7 +57,7 @@ export class Itinerary {
 }
 
 export class PassengerAn {
-    constructor(public passengerType: string) {};
+    constructor(public id: string, public passengerType: string) {};
 }
 
 export class Connection implements Segment {

@@ -1,0 +1,13 @@
+query getPassengerAndPaymentEntries($convId: Int, $orderId: String) {
+  passengerAndPaymentEntries(convId: $convId, orderId: $orderId) {
+    passengerEntries {
+      passengerId
+      additionalFields {
+        fieldId
+        fieldLabel
+        fieldDescription
+        fieldRegex
+      }
+    }
+  }
+}

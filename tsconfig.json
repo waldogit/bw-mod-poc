@@ -4,6 +4,11 @@
       "module": "commonjs",
       "target": "es6",
       "lib": ["es6", "esnext", "es2015"],
+      "paths": {"*": [
+        "node_modules/*",
+        "src/types/*"
+      ]},
+      "baseUrl": ".",
       "noImplicitAny": false,
       "suppressImplicitAnyIndexErrors": true,
       "moduleResolution": "node",
@@ -11,7 +16,7 @@
       "sourceMap": true,
       "declaration": true,
       "outDir": "./dist",
-      "rootDir": "./bw-mod-server/src"
+      "rootDir": "./bw-mod-server/src",
     },
     "files": ["bw-mod-server/src/index.ts"],
     "include": ["src/**/*.ts"],

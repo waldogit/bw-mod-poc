@@ -26,6 +26,6 @@ export class AncillariesProvider {
 
   }
   extractConnection(segments: number[], connectionType, convId): Connection {
-    return new Connection(segments.map(index => flightOffers[index]), connectionType, convId);
+    return new Connection(segments.map(index => flightOffers[index - 1]), connectionType, convId);
   }
 }

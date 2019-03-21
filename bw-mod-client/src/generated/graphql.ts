@@ -34,7 +34,7 @@ export namespace GetConversation {
   export type Conversation = {
     __typename?: "Conversation";
 
-    id: Maybe<string>;
+    id: string;
 
     convId: number;
 
@@ -92,7 +92,48 @@ export namespace GetConversation {
   export type Passengers = {
     __typename?: "Passenger";
 
+    id: string;
+
     passengerType: string;
+  };
+}
+
+export namespace GetPassengerAndPaymentEntries {
+  export type Variables = {
+    convId?: Maybe<number>;
+    orderId?: Maybe<string>;
+  };
+
+  export type Query = {
+    __typename?: "Query";
+
+    passengerAndPaymentEntries: Maybe<PassengerAndPaymentEntries>;
+  };
+
+  export type PassengerAndPaymentEntries = {
+    __typename?: "PassengerAndPaymentEntry";
+
+    passengerEntries: Maybe<(Maybe<PassengerEntries>)[]>;
+  };
+
+  export type PassengerEntries = {
+    __typename?: "PassengerEntry";
+
+    passengerId: string;
+
+    additionalFields: Maybe<(Maybe<AdditionalFields>)[]>;
+  };
+
+  export type AdditionalFields = {
+    __typename?: "FieldEntry";
+
+    fieldId: string;
+
+    fieldLabel: Maybe<string>;
+
+    fieldDescription: Maybe<string>;
+
+    fieldRegex: Maybe<string>;
   };
 }
 
@@ -146,7 +187,7 @@ export namespace StartConversation {
   export type Conversation = {
     __typename?: "Conversation";
 
-    id: Maybe<string>;
+    id: string;
 
     convId: number;
 
@@ -204,6 +245,8 @@ export namespace StartConversation {
   export type Passengers = {
     __typename?: "Passenger";
 
+    id: string;
+
     passengerType: string;
   };
 }
@@ -253,7 +296,31 @@ export class GetConversationGQL extends Apollo.Query<
           }
         }
         passengers {
+          id
           passengerType
+        }
+      }
+    }
+  `;
+}
+@Injectable({
+  providedIn: "root"
+})
+export class GetPassengerAndPaymentEntriesGQL extends Apollo.Query<
+  GetPassengerAndPaymentEntries.Query,
+  GetPassengerAndPaymentEntries.Variables
+> {
+  document: any = gql`
+    query getPassengerAndPaymentEntries($convId: Int, $orderId: String) {
+      passengerAndPaymentEntries(convId: $convId, orderId: $orderId) {
+        passengerEntries {
+          passengerId
+          additionalFields {
+            fieldId
+            fieldLabel
+            fieldDescription
+            fieldRegex
+          }
         }
       }
     }
@@ -312,6 +379,7 @@ export class StartConversationGQL extends Apollo.Mutation<
           }
         }
         passengers {
+          id
           passengerType
         }
       }
