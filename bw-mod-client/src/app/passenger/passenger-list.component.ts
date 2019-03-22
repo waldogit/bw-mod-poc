@@ -40,7 +40,6 @@ export class PassengerListComponent implements OnInit {
     this.form = this.fb.group({passengers: this.fb.array([])});
     this.passengers$ = this.getConversation.fetch({ convId: +this.convId }, {fetchPolicy: "cache-first"}).pipe(
       map(result => result.data.conversation.passengers),
-      tap(x => console.log('>>>>>>>>>>>>>>>>> passengers', x)),
       tap(x => this.passengerList = x),
       tap(convPassengers => {
         convPassengers.forEach(pax => this.buildPassengerControl(pax));
