@@ -1,8 +1,7 @@
 import { StepService } from './../step.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { StartConversation } from 'src/generated/graphql';
-import { Observable } from 'rxjs';
+import { Passenger } from 'src/generated/graphql';
 
 
 /**
@@ -19,7 +18,7 @@ import { Observable } from 'rxjs';
 export class PassengerComponent implements OnInit {
   @Input() formFields: FormArray; 
   @Input() fieldsMap;  
-  @Input() passengers: StartConversation.Passengers;
+  @Input() passengers: Passenger;
   @Input() index: number;
   @Input() numberOfPassengers: number;
   passengerForm: FormGroup;

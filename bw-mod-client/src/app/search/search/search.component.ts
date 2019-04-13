@@ -1,4 +1,4 @@
-import { Flights, ConversationInput, FlightsGQL, StartConversationGQL } from './../../../generated/graphql';
+import { Flight, ConversationInput, FlightsGQL, StartConversationGQL } from './../../../generated/graphql';
 import gql from "graphql-tag";
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,14 +9,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  flights: Flights.Flights[];
+  flights: Flight[];
   passengerTypes: String[];
   convId: string;
   outboundSelected: number;
   homeboundSelected: number;
   oneTo10: number[];
-  outboundFlights: Flights.Flights[];
-  homeboundFlights: Flights.Flights[];
+  outboundFlights: Flight[];
+  homeboundFlights: Flight[];
   adultCount: number;
   childCount: number;
   infantCount: number;

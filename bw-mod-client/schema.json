@@ -7,11 +7,11 @@
       {
         "kind": "OBJECT",
         "name": "Query",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "flights",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "LIST",
@@ -23,11 +23,11 @@
           },
           {
             "name": "conversation",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "convId",
-                "description": "",
+                "description": null,
                 "type": { "kind": "SCALAR", "name": "Int", "ofType": null },
                 "defaultValue": null
               }
@@ -42,17 +42,17 @@
           },
           {
             "name": "passengerAndPaymentEntries",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "convId",
-                "description": "",
+                "description": null,
                 "type": { "kind": "SCALAR", "name": "Int", "ofType": null },
                 "defaultValue": null
               },
               {
                 "name": "orderId",
-                "description": "",
+                "description": null,
                 "type": { "kind": "SCALAR", "name": "String", "ofType": null },
                 "defaultValue": null
               }
@@ -74,11 +74,11 @@
       {
         "kind": "OBJECT",
         "name": "Flight",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "Int", "ofType": null },
             "isDeprecated": false,
@@ -86,7 +86,7 @@
           },
           {
             "name": "flightcode",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -94,7 +94,7 @@
           },
           {
             "name": "fromAirport",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -102,7 +102,7 @@
           },
           {
             "name": "toAirport",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -110,7 +110,7 @@
           },
           {
             "name": "departureDate",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -118,7 +118,7 @@
           },
           {
             "name": "arrivalDate",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -126,7 +126,7 @@
           },
           {
             "name": "fare",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "OBJECT", "name": "Money", "ofType": null },
             "isDeprecated": false,
@@ -161,11 +161,11 @@
       {
         "kind": "OBJECT",
         "name": "Money",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "currencyCode",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -173,7 +173,7 @@
           },
           {
             "name": "amount",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "Float", "ofType": null },
             "isDeprecated": false,
@@ -198,11 +198,11 @@
       {
         "kind": "OBJECT",
         "name": "Conversation",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -214,7 +214,7 @@
           },
           {
             "name": "convId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -226,7 +226,7 @@
           },
           {
             "name": "itinerary",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -242,7 +242,7 @@
           },
           {
             "name": "passengers",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -279,11 +279,11 @@
       {
         "kind": "OBJECT",
         "name": "Itinerary",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "price",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -295,7 +295,7 @@
           },
           {
             "name": "bookingId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -303,7 +303,7 @@
           },
           {
             "name": "connections",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "LIST",
@@ -326,11 +326,11 @@
       {
         "kind": "OBJECT",
         "name": "Connection",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "connectionType",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -342,7 +342,7 @@
           },
           {
             "name": "segments",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -369,11 +369,11 @@
       {
         "kind": "OBJECT",
         "name": "Segment",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -381,7 +381,7 @@
           },
           {
             "name": "fromAirport",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -393,7 +393,7 @@
           },
           {
             "name": "toAirport",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -405,7 +405,7 @@
           },
           {
             "name": "departureDate",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -417,7 +417,7 @@
           },
           {
             "name": "arrivalDate",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -429,7 +429,7 @@
           },
           {
             "name": "fare",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -448,11 +448,11 @@
       {
         "kind": "OBJECT",
         "name": "Passenger",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -464,7 +464,7 @@
           },
           {
             "name": "passengerType",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -476,7 +476,7 @@
           },
           {
             "name": "fullName",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -484,7 +484,7 @@
           },
           {
             "name": "birthDate",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "Int", "ofType": null },
             "isDeprecated": false,
@@ -492,7 +492,7 @@
           },
           {
             "name": "emailAddress",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -500,7 +500,7 @@
           },
           {
             "name": "additionalFields",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -519,11 +519,11 @@
       {
         "kind": "OBJECT",
         "name": "AdditionalField",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "fieldId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -535,7 +535,7 @@
           },
           {
             "name": "fieldValue",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -550,11 +550,11 @@
       {
         "kind": "OBJECT",
         "name": "PassengerAndPaymentEntry",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "passengerEntries",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "LIST",
@@ -570,7 +570,7 @@
           },
           {
             "name": "paymentEntries",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "LIST",
@@ -593,11 +593,11 @@
       {
         "kind": "OBJECT",
         "name": "PassengerEntry",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -609,7 +609,7 @@
           },
           {
             "name": "passengerId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -621,7 +621,7 @@
           },
           {
             "name": "additionalFields",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "LIST",
@@ -644,11 +644,11 @@
       {
         "kind": "OBJECT",
         "name": "FieldEntry",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "fieldId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -660,7 +660,7 @@
           },
           {
             "name": "fieldLabel",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -668,7 +668,7 @@
           },
           {
             "name": "fieldDescription",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -676,7 +676,7 @@
           },
           {
             "name": "fieldRegex",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -691,11 +691,11 @@
       {
         "kind": "OBJECT",
         "name": "PaymentEntry",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "tbd",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -710,15 +710,15 @@
       {
         "kind": "OBJECT",
         "name": "Mutation",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "conversation",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "conversation",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "ConversationInput",
@@ -744,12 +744,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ConversationInput",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": [
           {
             "name": "outbound",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "LIST",
               "name": null,
@@ -759,7 +759,7 @@
           },
           {
             "name": "homebound",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "LIST",
               "name": null,
@@ -769,7 +769,7 @@
           },
           {
             "name": "passengerCounts",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "PassengerCoInput",
@@ -785,12 +785,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "PassengerCoInput",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": [
           {
             "name": "adult",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -800,7 +800,7 @@
           },
           {
             "name": "child",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -810,7 +810,7 @@
           },
           {
             "name": "infant",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1558,11 +1558,11 @@
       {
         "kind": "OBJECT",
         "name": "AdditionalFieldInput",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "fieldId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1574,7 +1574,7 @@
           },
           {
             "name": "fieldValue",
-            "description": "",
+            "description": null,
             "args": [],
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
@@ -1589,11 +1589,11 @@
       {
         "kind": "OBJECT",
         "name": "PassengerInput",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "paxType",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1605,7 +1605,7 @@
           },
           {
             "name": "fullName",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1617,7 +1617,7 @@
           },
           {
             "name": "emailAddress",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1629,7 +1629,7 @@
           },
           {
             "name": "additionalFields",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "LIST",

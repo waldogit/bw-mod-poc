@@ -1,9 +1,9 @@
 import { passengerEntries } from '../../../../bw-mod-server/src/shared/fake-data';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StartConversation, GetConversationGQL, GetPassengerAndPaymentEntriesGQL } from 'src/generated/graphql';
+import { Passenger, GetConversationGQL, GetPassengerAndPaymentEntriesGQL } from 'src/generated/graphql';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, filter } from 'rxjs/operators';
 import { Observable, AsyncSubject, from, zip } from 'rxjs';
 import { StepService } from './step.service';
 
@@ -22,12 +22,12 @@ import { StepService } from './step.service';
 export class PassengerListComponent implements OnInit {
   convId: string;
   orderId: string;
-  passengerList: StartConversation.Passengers[];
+  passengerList: Passenger[];
   form: FormGroup;
   step = 0;
   passengerFormGroupMap = {}; // passenger form keyed by passenger id
   passengerAdditionalMap = {}; // additional fields array by passenger id
-  private passengers$: Observable<StartConversation.Passengers[]>;
+  private passengers$: Observable<Passenger[]>;
   // make a form array for each passenger
   // within a passenger, make a form group for the fixed fields
   // and a form array for the additional fields
@@ -38,7 +38,9 @@ export class PassengerListComponent implements OnInit {
   ngOnInit() {
     this.convId = this.route.snapshot.paramMap.get('convId');
     this.form = this.fb.group({passengers: this.fb.array([])});
-    this.passengers$ = this.getConversation.fetch({ convId: +this.convId }, {fetchPolicy: "cache-first"}).pipe(
+    this.passengers$ = this.getConversation.watch({ convId: +this.convId }, {fetchPolicy: "cache-only"}).valueChanges.pipe(
+      tap(x => console.log('wwwwwwwwwwwwwwwwww1', x)),
+      filter(result => !!(result.data && result.data.conversation && result.data.conversation.passengers)),
       map(result => result.data.conversation.passengers),
       tap(x => this.passengerList = x),
       tap(convPassengers => {
@@ -68,7 +70,7 @@ export class PassengerListComponent implements OnInit {
 
 
     
-  buildPassengerControl(passenger: StartConversation.Passengers) {
+  buildPassengerControl(passenger: Passenger) {
     console.log('>>>>>>>map+', passenger.id);
     const additionalFields = new FormGroup({});
     const passengerFormArray: any = this.form['controls'].passengers;

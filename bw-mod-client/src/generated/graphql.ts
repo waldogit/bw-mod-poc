@@ -1,392 +1,435 @@
-export type Maybe<T> = T | null;
+type Maybe<T> = T | null;
+/** All built-in and custom scalars, mapped to their actual values */
+export type Scalars = {
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+};
 
-export interface ConversationInput {
-  outbound?: Maybe<(Maybe<number>)[]>;
+export type AdditionalField = {
+  fieldId: Scalars["String"];
+  fieldValue?: Maybe<Scalars["String"]>;
+};
 
-  homebound?: Maybe<(Maybe<number>)[]>;
+export type AdditionalFieldInput = {
+  fieldId: Scalars["String"];
+  fieldValue?: Maybe<Scalars["String"]>;
+};
 
+export type Connection = {
+  connectionType: Scalars["String"];
+  segments: Array<Maybe<Segment>>;
+};
+
+export type Conversation = {
+  id: Scalars["ID"];
+  convId: Scalars["Int"];
+  itinerary: Itinerary;
+  passengers: Array<Maybe<Passenger>>;
+};
+
+export type ConversationInput = {
+  outbound?: Maybe<Array<Maybe<Scalars["Int"]>>>;
+  homebound?: Maybe<Array<Maybe<Scalars["Int"]>>>;
   passengerCounts?: Maybe<PassengerCoInput>;
-}
-
-export interface PassengerCoInput {
-  adult: number;
-
-  child: number;
-
-  infant: number;
-}
-
-// ====================================================
-// Documents
-// ====================================================
-
-export namespace GetConversation {
-  export type Variables = {
-    convId?: Maybe<number>;
-  };
-
-  export type Query = {
-    __typename?: "Query";
-
-    conversation: Maybe<Conversation>;
-  };
-
-  export type Conversation = {
-    __typename?: "Conversation";
-
-    id: string;
-
-    convId: number;
-
-    itinerary: Itinerary;
-
-    passengers: (Maybe<Passengers>)[];
-  };
-
-  export type Itinerary = {
-    __typename?: "Itinerary";
-
-    price: Price;
-
-    connections: Maybe<(Maybe<Connections>)[]>;
-  };
-
-  export type Price = {
-    __typename?: "Money";
-
-    currencyCode: Maybe<string>;
-
-    amount: Maybe<number>;
-  };
-
-  export type Connections = {
-    __typename?: "Connection";
-
-    connectionType: string;
-
-    segments: (Maybe<Segments>)[];
-  };
-
-  export type Segments = {
-    __typename?: "Segment";
-
-    toAirport: string;
-
-    fromAirport: string;
-
-    fare: Fare;
-
-    arrivalDate: string;
-
-    departureDate: string;
-  };
-
-  export type Fare = {
-    __typename?: "Money";
-
-    currencyCode: Maybe<string>;
-
-    amount: Maybe<number>;
-  };
-
-  export type Passengers = {
-    __typename?: "Passenger";
-
-    id: string;
-
-    passengerType: string;
-  };
-}
-
-export namespace GetPassengerAndPaymentEntries {
-  export type Variables = {
-    convId?: Maybe<number>;
-    orderId?: Maybe<string>;
-  };
-
-  export type Query = {
-    __typename?: "Query";
-
-    passengerAndPaymentEntries: Maybe<PassengerAndPaymentEntries>;
-  };
-
-  export type PassengerAndPaymentEntries = {
-    __typename?: "PassengerAndPaymentEntry";
-
-    passengerEntries: Maybe<(Maybe<PassengerEntries>)[]>;
-  };
-
-  export type PassengerEntries = {
-    __typename?: "PassengerEntry";
-
-    passengerId: string;
-
-    additionalFields: Maybe<(Maybe<AdditionalFields>)[]>;
-  };
-
-  export type AdditionalFields = {
-    __typename?: "FieldEntry";
-
-    fieldId: string;
-
-    fieldLabel: Maybe<string>;
-
-    fieldDescription: Maybe<string>;
-
-    fieldRegex: Maybe<string>;
-  };
-}
-
-export namespace Flights {
-  export type Variables = {};
-
-  export type Query = {
-    __typename?: "Query";
-
-    flights: Maybe<(Maybe<Flights>)[]>;
-  };
-
-  export type Flights = {
-    __typename?: "Flight";
-
-    id: Maybe<number>;
-
-    flightcode: Maybe<string>;
-
-    fromAirport: Maybe<string>;
-
-    toAirport: Maybe<string>;
-
-    departureDate: Maybe<string>;
-
-    arrivalDate: Maybe<string>;
-
-    fare: Maybe<Fare>;
-  };
-
-  export type Fare = {
-    __typename?: "Money";
-
-    currencyCode: Maybe<string>;
-
-    amount: Maybe<number>;
-  };
-}
-
-export namespace StartConversation {
-  export type Variables = {
-    conversation?: Maybe<ConversationInput>;
-  };
-
-  export type Mutation = {
-    __typename?: "Mutation";
-
-    conversation: Maybe<Conversation>;
-  };
-
-  export type Conversation = {
-    __typename?: "Conversation";
-
-    id: string;
-
-    convId: number;
-
-    itinerary: Itinerary;
-
-    passengers: (Maybe<Passengers>)[];
-  };
-
-  export type Itinerary = {
-    __typename?: "Itinerary";
-
-    price: Price;
-
-    connections: Maybe<(Maybe<Connections>)[]>;
-  };
-
-  export type Price = {
-    __typename?: "Money";
-
-    currencyCode: Maybe<string>;
-
-    amount: Maybe<number>;
-  };
-
-  export type Connections = {
-    __typename?: "Connection";
-
-    connectionType: string;
-
-    segments: (Maybe<Segments>)[];
-  };
-
-  export type Segments = {
-    __typename?: "Segment";
-
-    toAirport: string;
-
-    fromAirport: string;
-
-    fare: Fare;
-
-    arrivalDate: string;
-
-    departureDate: string;
-  };
-
-  export type Fare = {
-    __typename?: "Money";
-
-    currencyCode: Maybe<string>;
-
-    amount: Maybe<number>;
-  };
-
-  export type Passengers = {
-    __typename?: "Passenger";
-
-    id: string;
-
-    passengerType: string;
-  };
-}
-
-// ====================================================
-// START: Apollo Angular template
-// ====================================================
-
+};
+
+export type FieldEntry = {
+  fieldId: Scalars["String"];
+  fieldLabel?: Maybe<Scalars["String"]>;
+  fieldDescription?: Maybe<Scalars["String"]>;
+  fieldRegex?: Maybe<Scalars["String"]>;
+};
+
+export type Flight = {
+  id?: Maybe<Scalars["Int"]>;
+  flightcode?: Maybe<Scalars["String"]>;
+  fromAirport?: Maybe<Scalars["String"]>;
+  toAirport?: Maybe<Scalars["String"]>;
+  departureDate?: Maybe<Scalars["String"]>;
+  arrivalDate?: Maybe<Scalars["String"]>;
+  fare?: Maybe<Money>;
+};
+
+export type Itinerary = {
+  price: Money;
+  bookingId?: Maybe<Scalars["String"]>;
+  connections?: Maybe<Array<Maybe<Connection>>>;
+};
+
+export type Money = {
+  currencyCode?: Maybe<Scalars["String"]>;
+  amount?: Maybe<Scalars["Float"]>;
+};
+
+export type Mutation = {
+  conversation?: Maybe<Conversation>;
+};
+
+export type MutationConversationArgs = {
+  conversation?: Maybe<ConversationInput>;
+};
+
+export type Passenger = {
+  id: Scalars["ID"];
+  passengerType: Scalars["String"];
+  fullName?: Maybe<Scalars["String"]>;
+  birthDate?: Maybe<Scalars["Int"]>;
+  emailAddress?: Maybe<Scalars["String"]>;
+  additionalFields?: Maybe<AdditionalField>;
+};
+
+export type PassengerAndPaymentEntry = {
+  passengerEntries?: Maybe<Array<Maybe<PassengerEntry>>>;
+  paymentEntries?: Maybe<Array<Maybe<PaymentEntry>>>;
+};
+
+export type PassengerCoInput = {
+  adult: Scalars["Int"];
+  child: Scalars["Int"];
+  infant: Scalars["Int"];
+};
+
+export type PassengerEntry = {
+  id: Scalars["ID"];
+  passengerId: Scalars["String"];
+  additionalFields?: Maybe<Array<Maybe<FieldEntry>>>;
+};
+
+export type PassengerInput = {
+  paxType: Scalars["String"];
+  fullName: Scalars["String"];
+  emailAddress: Scalars["String"];
+  additionalFields?: Maybe<Array<Maybe<AdditionalFieldInput>>>;
+};
+
+export type PaymentEntry = {
+  tbd?: Maybe<Scalars["String"]>;
+};
+
+export type Query = {
+  flights?: Maybe<Array<Maybe<Flight>>>;
+  conversation?: Maybe<Conversation>;
+  passengerAndPaymentEntries?: Maybe<PassengerAndPaymentEntry>;
+};
+
+export type QueryConversationArgs = {
+  convId?: Maybe<Scalars["Int"]>;
+};
+
+export type QueryPassengerAndPaymentEntriesArgs = {
+  convId?: Maybe<Scalars["Int"]>;
+  orderId?: Maybe<Scalars["String"]>;
+};
+
+export type Segment = {
+  id?: Maybe<Scalars["String"]>;
+  fromAirport: Scalars["String"];
+  toAirport: Scalars["String"];
+  departureDate: Scalars["String"];
+  arrivalDate: Scalars["String"];
+  fare: Money;
+};
+export type GetConversationQueryVariables = {
+  convId?: Maybe<Scalars["Int"]>;
+};
+
+export type GetConversationQuery = { __typename?: "Query" } & {
+  conversation: Maybe<
+    { __typename?: "Conversation" } & Pick<Conversation, "id" | "convId"> & {
+        itinerary: { __typename?: "Itinerary" } & {
+          price: { __typename?: "Money" } & Pick<
+            Money,
+            "currencyCode" | "amount"
+          >;
+          connections: Maybe<
+            Array<
+              Maybe<
+                { __typename?: "Connection" } & Pick<
+                  Connection,
+                  "connectionType"
+                > & {
+                    segments: Array<
+                      Maybe<
+                        { __typename?: "Segment" } & Pick<
+                          Segment,
+                          | "toAirport"
+                          | "fromAirport"
+                          | "arrivalDate"
+                          | "departureDate"
+                        > & {
+                            fare: { __typename?: "Money" } & Pick<
+                              Money,
+                              "currencyCode" | "amount"
+                            >;
+                          }
+                      >
+                    >;
+                  }
+              >
+            >
+          >;
+        };
+        passengers: Array<
+          Maybe<
+            { __typename?: "Passenger" } & Pick<
+              Passenger,
+              "id" | "passengerType"
+            >
+          >
+        >;
+      }
+  >;
+};
+
+export type GetPassengerAndPaymentEntriesQueryVariables = {
+  convId?: Maybe<Scalars["Int"]>;
+  orderId?: Maybe<Scalars["String"]>;
+};
+
+export type GetPassengerAndPaymentEntriesQuery = { __typename?: "Query" } & {
+  passengerAndPaymentEntries: Maybe<
+    { __typename?: "PassengerAndPaymentEntry" } & {
+      passengerEntries: Maybe<
+        Array<
+          Maybe<
+            { __typename?: "PassengerEntry" } & Pick<
+              PassengerEntry,
+              "passengerId"
+            > & {
+                additionalFields: Maybe<
+                  Array<
+                    Maybe<
+                      { __typename?: "FieldEntry" } & Pick<
+                        FieldEntry,
+                        | "fieldId"
+                        | "fieldLabel"
+                        | "fieldDescription"
+                        | "fieldRegex"
+                      >
+                    >
+                  >
+                >;
+              }
+          >
+        >
+      >;
+    }
+  >;
+};
+
+export type FlightsQueryVariables = {};
+
+export type FlightsQuery = { __typename?: "Query" } & {
+  flights: Maybe<
+    Array<
+      Maybe<
+        { __typename?: "Flight" } & Pick<
+          Flight,
+          | "id"
+          | "flightcode"
+          | "fromAirport"
+          | "toAirport"
+          | "departureDate"
+          | "arrivalDate"
+        > & {
+            fare: Maybe<
+              { __typename?: "Money" } & Pick<Money, "currencyCode" | "amount">
+            >;
+          }
+      >
+    >
+  >;
+};
+
+export type StartConversationMutationVariables = {
+  conversation?: Maybe<ConversationInput>;
+};
+
+export type StartConversationMutation = { __typename?: "Mutation" } & {
+  conversation: Maybe<
+    { __typename?: "Conversation" } & Pick<Conversation, "id" | "convId"> & {
+        itinerary: { __typename?: "Itinerary" } & {
+          price: { __typename?: "Money" } & Pick<
+            Money,
+            "currencyCode" | "amount"
+          >;
+          connections: Maybe<
+            Array<
+              Maybe<
+                { __typename?: "Connection" } & Pick<
+                  Connection,
+                  "connectionType"
+                > & {
+                    segments: Array<
+                      Maybe<
+                        { __typename?: "Segment" } & Pick<
+                          Segment,
+                          | "toAirport"
+                          | "fromAirport"
+                          | "arrivalDate"
+                          | "departureDate"
+                        > & {
+                            fare: { __typename?: "Money" } & Pick<
+                              Money,
+                              "currencyCode" | "amount"
+                            >;
+                          }
+                      >
+                    >;
+                  }
+              >
+            >
+          >;
+        };
+        passengers: Array<
+          Maybe<
+            { __typename?: "Passenger" } & Pick<
+              Passenger,
+              "id" | "passengerType"
+            >
+          >
+        >;
+      }
+  >;
+};
+
+import gql from "graphql-tag";
 import { Injectable } from "@angular/core";
 import * as Apollo from "apollo-angular";
 
-import gql from "graphql-tag";
-
-// ====================================================
-// Apollo Services
-// ====================================================
+export const GetConversationDocument = gql`
+  query getConversation($convId: Int) {
+    conversation(convId: $convId) {
+      id
+      convId
+      itinerary {
+        price {
+          currencyCode
+          amount
+        }
+        connections {
+          connectionType
+          segments {
+            toAirport
+            fromAirport
+            fare {
+              currencyCode
+              amount
+            }
+            arrivalDate
+            departureDate
+          }
+        }
+      }
+      passengers {
+        id
+        passengerType
+      }
+    }
+  }
+`;
 
 @Injectable({
   providedIn: "root"
 })
 export class GetConversationGQL extends Apollo.Query<
-  GetConversation.Query,
-  GetConversation.Variables
+  GetConversationQuery,
+  GetConversationQueryVariables
 > {
-  document: any = gql`
-    query getConversation($convId: Int) {
-      conversation(convId: $convId) {
-        id
-        convId
-        itinerary {
-          price {
-            currencyCode
-            amount
-          }
-          connections {
-            connectionType
-            segments {
-              toAirport
-              fromAirport
-              fare {
-                currencyCode
-                amount
-              }
-              arrivalDate
-              departureDate
-            }
-          }
-        }
-        passengers {
-          id
-          passengerType
+  document = GetConversationDocument;
+}
+export const GetPassengerAndPaymentEntriesDocument = gql`
+  query getPassengerAndPaymentEntries($convId: Int, $orderId: String) {
+    passengerAndPaymentEntries(convId: $convId, orderId: $orderId) {
+      passengerEntries {
+        passengerId
+        additionalFields {
+          fieldId
+          fieldLabel
+          fieldDescription
+          fieldRegex
         }
       }
     }
-  `;
-}
+  }
+`;
+
 @Injectable({
   providedIn: "root"
 })
 export class GetPassengerAndPaymentEntriesGQL extends Apollo.Query<
-  GetPassengerAndPaymentEntries.Query,
-  GetPassengerAndPaymentEntries.Variables
+  GetPassengerAndPaymentEntriesQuery,
+  GetPassengerAndPaymentEntriesQueryVariables
 > {
-  document: any = gql`
-    query getPassengerAndPaymentEntries($convId: Int, $orderId: String) {
-      passengerAndPaymentEntries(convId: $convId, orderId: $orderId) {
-        passengerEntries {
-          passengerId
-          additionalFields {
-            fieldId
-            fieldLabel
-            fieldDescription
-            fieldRegex
-          }
-        }
+  document = GetPassengerAndPaymentEntriesDocument;
+}
+export const FlightsDocument = gql`
+  query flights {
+    flights {
+      id
+      flightcode
+      fromAirport
+      toAirport
+      departureDate
+      arrivalDate
+      fare {
+        currencyCode
+        amount
       }
     }
-  `;
-}
+  }
+`;
+
 @Injectable({
   providedIn: "root"
 })
-export class FlightsGQL extends Apollo.Query<Flights.Query, Flights.Variables> {
-  document: any = gql`
-    query flights {
-      flights {
-        id
-        flightcode
-        fromAirport
-        toAirport
-        departureDate
-        arrivalDate
-        fare {
+export class FlightsGQL extends Apollo.Query<
+  FlightsQuery,
+  FlightsQueryVariables
+> {
+  document = FlightsDocument;
+}
+export const StartConversationDocument = gql`
+  mutation startConversation($conversation: ConversationInput) {
+    conversation(conversation: $conversation) {
+      id
+      convId
+      itinerary {
+        price {
           currencyCode
           amount
         }
+        connections {
+          connectionType
+          segments {
+            toAirport
+            fromAirport
+            fare {
+              currencyCode
+              amount
+            }
+            arrivalDate
+            departureDate
+          }
+        }
+      }
+      passengers {
+        id
+        passengerType
       }
     }
-  `;
-}
+  }
+`;
+
 @Injectable({
   providedIn: "root"
 })
 export class StartConversationGQL extends Apollo.Mutation<
-  StartConversation.Mutation,
-  StartConversation.Variables
+  StartConversationMutation,
+  StartConversationMutationVariables
 > {
-  document: any = gql`
-    mutation startConversation($conversation: ConversationInput) {
-      conversation(conversation: $conversation) {
-        id
-        convId
-        itinerary {
-          price {
-            currencyCode
-            amount
-          }
-          connections {
-            connectionType
-            segments {
-              toAirport
-              fromAirport
-              fare {
-                currencyCode
-                amount
-              }
-              arrivalDate
-              departureDate
-            }
-          }
-        }
-        passengers {
-          id
-          passengerType
-        }
-      }
-    }
-  `;
+  document = StartConversationDocument;
 }
-
-// ====================================================
-// END: Apollo Angular template
-// ====================================================

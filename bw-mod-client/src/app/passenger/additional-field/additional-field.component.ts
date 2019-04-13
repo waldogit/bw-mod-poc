@@ -1,4 +1,4 @@
-import { GetPassengerAndPaymentEntries } from './../../../generated/graphql';
+import { FieldEntry } from './../../../generated/graphql';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 
@@ -8,7 +8,7 @@ import { FormGroup, FormArray } from '@angular/forms';
   styleUrls: ['./additional-field.component.scss']
 })
 export class AdditionalFieldComponent implements OnInit {
-  @Input() additional: GetPassengerAndPaymentEntries.AdditionalFields;
+  @Input() additional: FieldEntry;
   @Input() index: number
   @Input() passengerId: string;
   @Input() passengerForm: FormGroup;
