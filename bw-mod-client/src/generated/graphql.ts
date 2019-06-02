@@ -295,8 +295,8 @@ export const ConversationFragmentFragment = gql`
   providedIn: "root"
 })
 export class GetConversationGQL extends Apollo.Query<
-  GetConversation.Query,
-  GetConversation.Variables
+  GetConversationQuery,
+  GetConversationQueryVariables
 > {
   document: any = gql`
     query getConversation($convId: Int) {
@@ -312,8 +312,8 @@ export class GetConversationGQL extends Apollo.Query<
   providedIn: "root"
 })
 export class GetPassengerAndPaymentEntriesGQL extends Apollo.Query<
-  GetPassengerAndPaymentEntries.Query,
-  GetPassengerAndPaymentEntries.Variables
+  GetPassengerAndPaymentEntriesQuery,
+  GetPassengerAndPaymentEntriesQueryVariables
 > {
   document: any = gql`
     query getPassengerAndPaymentEntries($convId: Int, $orderId: String) {
@@ -334,7 +334,7 @@ export class GetPassengerAndPaymentEntriesGQL extends Apollo.Query<
 @Injectable({
   providedIn: "root"
 })
-export class FlightsGQL extends Apollo.Query<Flights.Query, Flights.Variables> {
+export class FlightsGQL extends Apollo.Query<FlightsQuery, FlightsQueryVariables> {
   document: any = gql`
     query flights {
       flights {
@@ -356,8 +356,8 @@ export class FlightsGQL extends Apollo.Query<Flights.Query, Flights.Variables> {
   providedIn: "root"
 })
 export class StartConversationGQL extends Apollo.Mutation<
-  StartConversation.Mutation,
-  StartConversation.Variables
+  StartConversationMutation,
+  StartConversationMutationVariables
 > {
   document: any = gql`
     mutation startConversation($conversation: ConversationInput) {
