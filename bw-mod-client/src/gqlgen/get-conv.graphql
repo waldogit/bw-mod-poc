@@ -1,29 +1,5 @@
 query getConversation($convId: Int) {
   conversation(convId: $convId) {
-    id
-    convId
-    itinerary {
-      price {
-        currencyCode
-        amount
-      }
-      connections {
-        connectionType
-        segments {
-          toAirport
-          fromAirport
-          fare {
-            currencyCode
-            amount
-          }
-          arrivalDate
-          departureDate
-        }
-      }
-    }
-    passengers {
-      id
-      passengerType
-    }
+    ...ConversationFragment
   }
 }

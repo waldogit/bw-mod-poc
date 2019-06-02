@@ -1,35 +1,11 @@
 mutation startConversation($conversation: ConversationInput) {
   conversation(conversation: $conversation) {
-    id
-    convId
-    itinerary {
-      price {
-        currencyCode
-        amount
-      }
-      connections {
-        connectionType
-        segments {
-          toAirport
-          fromAirport
-          fare {
-            currencyCode
-            amount
-          }
-          arrivalDate
-          departureDate
-        }
-      }
-    }
-    passengers {
-      id
-      passengerType
-    }
+    ...ConversationFragment
   }
 }
 # update using (_.data.conversation.convId)
 
 # yes this proposal would be invalid graphql, but the developer experience would be such a bliss!
 # It further leverages the assumption that the mutation and updated query field key are homonymic.
-# assuming they also return the same type, then all that is needed to generate the update is a way to map the mutation response 
+# assuming they also return the same type, then all that is needed to generate the update is a way to map the mutation response
 # to the query input

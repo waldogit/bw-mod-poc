@@ -1,0 +1,27 @@
+fragment ConversationFragment on Conversation {
+  id
+  convId
+  itinerary {
+    price {
+      currencyCode
+      amount
+    }
+    connections {
+      connectionType
+      segments {
+        toAirport
+        fromAirport
+        fare {
+          currencyCode
+          amount
+        }
+        arrivalDate
+        departureDate
+      }
+    }
+  }
+  passengers {
+    id
+    passengerType
+  }
+}

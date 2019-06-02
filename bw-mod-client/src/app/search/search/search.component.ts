@@ -1,4 +1,4 @@
-import { Flight, ConversationInput, FlightsGQL, StartConversationGQL } from './../../../generated/graphql';
+import { ConversationFragmentFragment, Flight, ConversationInput, FlightsGQL, StartConversationGQL } from './../../../generated/graphql';
 import gql from "graphql-tag";
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,9 +20,9 @@ export class SearchComponent implements OnInit {
   adultCount: number;
   childCount: number;
   infantCount: number;
-  
+
   constructor(private getFlights: FlightsGQL, private startConversation: StartConversationGQL, private route: ActivatedRoute, private router: Router) { }
-  
+
   ngOnInit() {
     this.getFlights.fetch()
     .subscribe(result => {
@@ -45,32 +45,10 @@ export class SearchComponent implements OnInit {
           query: gql`
           query getConversation($convId: Int) {
             conversation(convId: $convId) {
-              id
-              convId
-              itinerary {
-                price {
-                  currencyCode
-                  amount
-                }
-                connections {
-                  connectionType
-                  segments {
-                    toAirport
-                    fromAirport
-                    fare {
-                      currencyCode
-                      amount
-                    }
-                    arrivalDate
-                    departureDate
-                  }
-                }
-              }
-              passengers {
-                passengerType
-              }
+              ...ConversationFragment
             }
           }
+          ${ConversationFragmentFragment}
         `,
         variables: {
             convId: res.data.conversation.convId
