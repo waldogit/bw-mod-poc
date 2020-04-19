@@ -4,8 +4,8 @@ import { SearchModule } from './search/search.module'
 import { PassengerModule } from './passenger/passenger.module'
 
 const routes: Routes = [
-  { path: 'search', loadChildren: './search/search.module#SearchModule' },
-  { path: 'passenger', loadChildren: './passenger/passenger.module#PassengerModule' }
+  { path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule) },
+  { path: 'passenger', loadChildren: () => import('./passenger/passenger.module').then(m => m.PassengerModule) }
 ];
 
 @NgModule({
