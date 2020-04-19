@@ -32,13 +32,13 @@ export class PassengerListComponent implements OnInit {
   // within a passenger, make a form group for the fixed fields
   // and a form array for the additional fields
 
-  constructor(private stepService: StepService, private fb: FormBuilder, private getConversation: GetConversationGQL, private getPassengerFields: GetPassengerAndPaymentEntriesGQL, 
+  constructor(private stepService: StepService, private fb: FormBuilder, private getConversation: GetConversationGQL, private getPassengerFields: GetPassengerAndPaymentEntriesGQL,
     private route: ActivatedRoute, private router: Router) { }
-  
+
   ngOnInit() {
     this.convId = this.route.snapshot.paramMap.get('convId');
     this.form = this.fb.group({passengers: this.fb.array([])});
-    this.passengers$ = this.getConversation.watch({ convId: +this.convId }, {fetchPolicy: "cache-only"}).valueChanges.pipe(
+    this.passengers$ = this.getConversation.watch({ convId: + this.convId }, {fetchPolicy: "cache-only"}).valueChanges.pipe(
       tap(x => console.log('wwwwwwwwwwwwwwwwww1', x)),
       filter(result => !!(result.data && result.data.conversation && result.data.conversation.passengers)),
       map(result => result.data.conversation.passengers),
@@ -60,7 +60,7 @@ export class PassengerListComponent implements OnInit {
               console.log('====================1',passengerEntry.passengerId);
               console.log('====================2', this.passengerFormGroupMap[passengerEntry.passengerId]);
               this.passengerAdditionalMap[passengerEntry.passengerId] = passengerEntry.additionalFields;
-              passengerEntry.additionalFields.forEach(additionalField => 
+              passengerEntry.additionalFields.forEach(additionalField =>
                 this.passengerFormGroupMap[passengerEntry.passengerId].get('additionalFields').addControl(additionalField.fieldId, new FormControl('')))
             }
           }
@@ -69,12 +69,12 @@ export class PassengerListComponent implements OnInit {
   }
 
 
-    
+
   buildPassengerControl(passenger: Passenger) {
     console.log('>>>>>>>map+', passenger.id);
     const additionalFields = new FormGroup({});
     const passengerFormArray: any = this.form['controls'].passengers;
-    const passengerFormGroup = 
+    const passengerFormGroup =
     new FormGroup({
       fullName: new FormControl(''),
       birthDate: new FormControl(''),

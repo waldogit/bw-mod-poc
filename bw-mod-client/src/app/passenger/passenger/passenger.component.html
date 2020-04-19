@@ -10,10 +10,13 @@
           <input matInput placeholder="Full Name" formControlName="fullName"/>
           <mat-hint>First and last name in the proper order</mat-hint>
         </mat-form-field>
-        <mat-form-field>
-          <input matInput [matDatepicker]="birthDate" placeholder="Birth Date" formControlName="birthDate"/>
-          <mat-hint>Date of Birth</mat-hint>
-        </mat-form-field>
+        <!--
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="birthDate" placeholder="Birth Date" formControlName="birthDate"/>
+            <mat-hint>Date of Birth</mat-hint>
+          </mat-form-field>
+        -->
         <div *ngFor="let fieldDefs of fieldsMap[passengerId]; let i = index">
           <additional-field [additional]="fieldDefs" [passengerForm]="passengerForm" [passengerId]="passengerId" [index]="i"></additional-field>
         </div>
