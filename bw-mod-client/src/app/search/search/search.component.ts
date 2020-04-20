@@ -1,5 +1,4 @@
 import { ConversationFragmentFragment, Flight, ConversationInput, FlightsGQL, StartConversationGQL } from './../../../generated/graphql';
-import gql from "graphql-tag";
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -21,7 +20,11 @@ export class SearchComponent implements OnInit {
   childCount: number;
   infantCount: number;
 
-  constructor(private getFlights: FlightsGQL, private startConversation: StartConversationGQL, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private getFlights: FlightsGQL,
+    private startConversation: StartConversationGQL,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.getFlights.fetch()
@@ -40,26 +43,12 @@ export class SearchComponent implements OnInit {
         infant: +this.infantCount
       }
     };
-    this.startConversation.mutate({conversation: input}, {update: (cache, res) => {
-      cache.writeQuery({
-          query: gql`
-          query getConversation($convId: Int) {
-            conversation(convId: $convId) {
-              ...ConversationFragment
-            }
-          }
-          ${ConversationFragmentFragment}
-        `,
-        variables: {
-            convId: res.data.conversation.convId
-        },
-        data: res.data
-      })
-  }}).subscribe(result => {
+    console.log('adding conversation', input);
+    this.startConversation.mutate({conversation: input}).subscribe(result => {
       console.log('=====================start conv result.data', result.data.conversation);
       this.router.navigate([`../passenger/${result.data.conversation.convId}`]);
 
-    })
+    });
   }
   updateOutbound(outbound: number) {
     this.outboundSelected = outbound;

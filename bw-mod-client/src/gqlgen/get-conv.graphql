@@ -1,5 +1,0 @@
-query getConversation($convId: Int) {
-  conversation(convId: $convId) {
-    ...ConversationFragment
-  }
-}

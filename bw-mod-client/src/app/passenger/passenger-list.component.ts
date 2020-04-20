@@ -1,7 +1,9 @@
 import { passengerEntries } from '../../../../bw-mod-server/src/shared/fake-data';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Passenger, GetConversationGQL, GetPassengerAndPaymentEntriesGQL } from 'src/generated/graphql';
+import { Passenger, ConversationFragmentFragment, GetPassengerAndPaymentEntriesGQL } from 'src/generated/graphql';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { map, tap, filter } from 'rxjs/operators';
 import { Observable, AsyncSubject, from, zip } from 'rxjs';
@@ -32,40 +34,38 @@ export class PassengerListComponent implements OnInit {
   // within a passenger, make a form group for the fixed fields
   // and a form array for the additional fields
 
-  constructor(private stepService: StepService, private fb: FormBuilder, private getConversation: GetConversationGQL, private getPassengerFields: GetPassengerAndPaymentEntriesGQL,
+  constructor(private apollo: Apollo, private stepService: StepService, private fb: FormBuilder, private getPassengerFields: GetPassengerAndPaymentEntriesGQL,
     private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.convId = this.route.snapshot.paramMap.get('convId');
+    this.convId = this.route.snapshot.params['convId'];
+    console.log('about to get from cache object with conv id ' + this.convId);
     this.form = this.fb.group({passengers: this.fb.array([])});
-    this.passengers$ = this.getConversation.watch({ convId: + this.convId }, {fetchPolicy: "cache-only"}).valueChanges.pipe(
-      tap(x => console.log('wwwwwwwwwwwwwwwwww1', x)),
-      filter(result => !!(result.data && result.data.conversation && result.data.conversation.passengers)),
-      map(result => result.data.conversation.passengers),
-      tap(x => this.passengerList = x),
-      tap(convPassengers => {
-        convPassengers.forEach(pax => this.buildPassengerControl(pax));
-      }),
-      tap(x => console.log('form after patching in conv passengers', this.form)),
-    );
-    zip(
-      from(this.passengers$),
-      this.getPassengerFields.fetch({ convId: +this.convId}),
-      (form, field) => field
-    ).subscribe(result => {
+    const objectId = 'Conversation:' + this.convId;
+    const convFromCache = this.apollo.getClient().readFragment({
+      id: objectId,
+      fragment: ConversationFragmentFragment
+    });
+    console.log('conv from cache read frag', convFromCache);
+    const convPassengers = convFromCache.passengers;
+    this.passengerList = convPassengers;
+    convPassengers.forEach(pax => this.buildPassengerControl(pax));
+    this.getPassengerFields.fetch({ convId: +this.convId}).subscribe(result => {
         console.log('incoming passengerfields==============: ', result.data);
         result.data.passengerAndPaymentEntries.passengerEntries.forEach(
           passengerEntry => {
             if (passengerEntry.additionalFields) {
-              console.log('====================1',passengerEntry.passengerId);
+              console.log('====================1', passengerEntry.passengerId);
               console.log('====================2', this.passengerFormGroupMap[passengerEntry.passengerId]);
               this.passengerAdditionalMap[passengerEntry.passengerId] = passengerEntry.additionalFields;
               passengerEntry.additionalFields.forEach(additionalField =>
-                this.passengerFormGroupMap[passengerEntry.passengerId].get('additionalFields').addControl(additionalField.fieldId, new FormControl('')))
+                this.passengerFormGroupMap[passengerEntry.passengerId].get('additionalFields').addControl(additionalField.fieldId, new FormControl('')));
             }
           }
-        )
+        );
+        console.log('subscribed', this);
       });
+      console.log('end of init', this);
   }
 
 

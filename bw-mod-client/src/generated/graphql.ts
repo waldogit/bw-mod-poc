@@ -164,16 +164,6 @@ export type ConversationFragmentFragment = {
     >;
   };
 
-export type GetConversationQueryVariables = {
-  convId?: Maybe<number>;
-};
-
-export type GetConversationQuery = { __typename?: "Query" } & {
-  conversation: Maybe<
-    { __typename?: "Conversation" } & ConversationFragmentFragment
-  >;
-};
-
 export type GetPassengerAndPaymentEntriesQueryVariables = {
   convId?: Maybe<number>;
   orderId?: Maybe<string>;
@@ -291,23 +281,6 @@ export const ConversationFragmentFragment = gql`
 // Apollo Services
 // ====================================================
 
-@Injectable({
-  providedIn: "root"
-})
-export class GetConversationGQL extends Apollo.Query<
-  GetConversationQuery,
-  GetConversationQueryVariables
-> {
-  document: any = gql`
-    query getConversation($convId: Int) {
-      conversation(convId: $convId) {
-        ...ConversationFragment
-      }
-    }
-
-    ${ConversationFragmentFragment}
-  `;
-}
 @Injectable({
   providedIn: "root"
 })

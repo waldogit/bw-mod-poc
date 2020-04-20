@@ -6,9 +6,9 @@
 
 do an experiment to find the most effective way to organise gql modules.
 
-#### in scope: 
+#### in scope:
 * what is a good dividing principle to break up the logic?
-#### out of scope: 
+#### out of scope:
 * how to overcome particular quircks in particular APIs?
 
 ### Client:
@@ -19,11 +19,11 @@ do an experiment to find the most effective way to organise gql modules.
 
 ## Lessons Learned:
 ### Dividing principle
-The dividing principle used is: each individual GQL modules is focused to a single domain API. 
+The dividing principle used is: each individual GQL modules is focused to a single domain API.
 Rationale:
 - domain api context (types, endpoints, error codes, etc) is in a single place
 - modules have a natural dev team that 'stewards' it; other teams can make PRs, but domain dev team member(s) must approve
-- modules can be more homogenuous: 
+- modules can be more homogenuous:
     - domains typically have a '_value_' aspect, which represent the transactional data which are externally visible
     - besides that, they typically have an '*entry*' aspect, that describes the meta level that is helpful in creating and validating transactional values. This part is typically internal to the domain. The distinction between these 2 aspects can be reflected in folder structure, file names and schema.
 - This organisation along the underlying domain API has no implications whatsoever on the schema, which can still be oriented towards user tasks, due to the way the modules can be stacked to a single schema.
@@ -34,7 +34,8 @@ At some point you will need to join data from different domains. I think that sh
 Type safety and service generation are great productivity boosters, and help keep the client code succinct and maintainable.
 
 ### Cache reuse
-More than just type safety, the aspect of *cache reuse* is where GQL as a data aggregation layer shows its true potential. By mapping all traffic through a shared schema, expressing navigation / manipulation in a shared cache can be unambiguous. This is a great way to combine a progressive user oriented page interaction with optimally tuned and aggregated data traffic. 
+More than just type safety, the aspect of *cache reuse* is where GQL as a data aggregation layer shows its true potential. By mapping all traffic through a shared schema, expressing navigation / manipulation in a shared cache can be unambiguous. This is a great way to combine a progressive user oriented page interaction with optimally tuned and aggregated data traffic.
+The approach to operate on the cache to overcome limitations in how watchqueries get updated has a poor DX. The original Relay approach of using Global Object Identifier access is still a superior way of having autonomous components. Fortunately that approach can be applied with apollo client using readFragment.
 That said, to allow the result of a mutation to be reused in a subsequent query, at present does require manual coding to properly set the cache. The succinct interaction we enjoy due to the code generation, makes the contrast with the verbosity of updating the cache even greater. But code generation is a new feature which is likely to be improved in the near future.
 
 ### Page load waits
