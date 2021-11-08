@@ -13,7 +13,7 @@
     "@graphql-modules/di": "^0.3.0",
     "@graphql-modules/epoxy": "0.3.0",
     "@graphql-modules/sonar": "0.3.0",
-    "apollo-server": "2.1.0",
+    "apollo-server": "2.25.3",
     "graphql": "14.0.2",
     "node": "^11.12.0",
     "reflect-metadata": "0.1.12",
